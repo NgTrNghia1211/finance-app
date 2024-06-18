@@ -45,14 +45,10 @@ export const AccountForm = ({
   });
 
   const handleSubmit = (values: FormValues) => {
-    console.log("NEW_ACCOUNT:", { values });
-
     onSubmit(values);
   };
 
   const handleDelete = () => {
-    console.log("DELETE_ACCOUNT:", { id });
-
     onDelete?.();
   };
 
