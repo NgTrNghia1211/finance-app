@@ -1,6 +1,7 @@
 import { Hono } from "hono";
+import { z } from "zod";
 
-import { eq } from "drizzle-orm";
+import { and, eq, inArray } from "drizzle-orm";
 import { db } from "@/db/drizzle";
 import { accounts, insertAccountSchema } from "@/db/schema";
 
@@ -69,6 +70,47 @@ const app = new Hono()
           userId: auth.userId,
         })
         .returning();
+
+      return c.json({
+        data,
+      });
+    }
+  )
+  .post(
+    "/bulk-delete",
+    clerkMiddleware(),
+    zValidator(
+      "json",
+      z.object({
+        ids: z.array(z.string()),
+      })
+    ),
+    async (c) => {
+      const auth = getAuth(c);
+      const values = c.req.valid("json");
+
+      if (!auth?.userId) {
+        throw new HTTPException(403, {
+          res: c.json(
+            {
+              error: "Unauthorized",
+            },
+            403
+          ),
+        });
+      }
+
+      const data = await db
+        .delete(accounts)
+        .where(
+          and(
+            eq(accounts.userId, auth.userId),
+            inArray(accounts.id, values.ids)
+          )
+        )
+        .returning({
+          id: accounts.id,
+        });
 
       return c.json({
         data,

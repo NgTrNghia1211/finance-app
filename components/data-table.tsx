@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { useConfirm } from "@/hooks/use-confirm";
 
 import {
   ColumnDef,
@@ -45,6 +46,10 @@ export function DataTable<TData, TValue>({
   const [sorting, setSorting] = useState<SortingState>([]);
   const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
   const [rowSelection, setRowSelection] = useState({});
+  const [ConfirmationDialog, confirm] = useConfirm(
+    "Are you sure?",
+    "You are about to perform a bulk delete."
+  );
 
   const table = useReactTable({
     data,
@@ -65,9 +70,10 @@ export function DataTable<TData, TValue>({
 
   return (
     <div>
+      <ConfirmationDialog />
       <div className="flex items-center py-4">
         <Input
-          placeholder={`Filtering by ${filterKey}`}
+          placeholder={`Filtering ${filterKey}...`}
           value={(table.getColumn(filterKey)?.getFilterValue() as string) ?? ""}
           onChange={(event) =>
             table.getColumn("email")?.setFilterValue(event.target.value)
@@ -79,9 +85,14 @@ export function DataTable<TData, TValue>({
             disabled={disabled}
             size={"sm"}
             variant={"outline"}
-            // onClick={() => {
-            //   table.getFilteredRowModel().clearFilters();
-            // }}
+            onClick={async () => {
+              const ok = await confirm();
+
+              if (ok) {
+                onDelete(table.getFilteredSelectedRowModel().rows);
+                table.resetRowSelection();
+              }
+            }}
             className="ml-auto font-normal text-xs"
           >
             Delete ({table.getFilteredSelectedRowModel().rows.length})
