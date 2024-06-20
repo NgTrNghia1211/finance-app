@@ -131,7 +131,7 @@ const app = new Hono()
         })
         .from(transactions)
         .innerJoin(accounts, eq(transactions.accountId, accounts.id))
-        .where(and(eq(accounts.userId, auth.userId), eq(transactions.id, id)));
+        .where(and(eq(transactions.id, id), eq(accounts.userId, auth.userId)));
 
       if (!data) {
         throw new HTTPException(404, {
@@ -253,7 +253,7 @@ const app = new Hono()
           .where(
             and(
               inArray(transactions.id, values.ids),
-              eq(accounts.id, auth.userId)
+              eq(accounts.userId, auth.userId)
             )
           )
       );
@@ -321,7 +321,7 @@ const app = new Hono()
           .select({ id: transactions.id })
           .from(transactions)
           .innerJoin(accounts, eq(transactions.accountId, accounts.id))
-          .where(and(eq(transactions.id, id), eq(accounts.id, auth.userId)))
+          .where(and(eq(transactions.id, id), eq(accounts.userId, auth.userId)))
       );
 
       const [data] = await db
@@ -387,7 +387,7 @@ const app = new Hono()
           .select({ id: transactions.id })
           .from(transactions)
           .innerJoin(accounts, eq(transactions.accountId, accounts.id))
-          .where(and(eq(transactions.id, id), eq(accounts.id, auth.userId)))
+          .where(and(eq(transactions.id, id), eq(accounts.userId, auth.userId)))
       );
 
       const [data] = await db

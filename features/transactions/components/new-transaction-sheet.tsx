@@ -91,6 +91,14 @@ export const NewTransactionSheet = () => {
             onCreateCategory={onCreateCategory}
             accountOptions={accountOptions}
             onCreateAccount={onCreateAccount}
+            defaultValues={{
+              accountId: "",
+              categoryId: "",
+              amount: "",
+              date: new Date(),
+              payee: "",
+              notes: "",
+            }}
           />
         )}
       </SheetContent>
