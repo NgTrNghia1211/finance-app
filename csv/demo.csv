@@ -1,0 +1,11 @@
+Type,Product,Started_date,Completed_date,Description,Amount,Fee,Currency,State,Balance
+Income,"Widget Sale",2024-06-21 10:00:00,2024-06-21 10:00:00,"Sale of 10 widgets",100.00,2.50,USD,COMPLETED,97.50
+Expense,"Coffee Subscription",2024-06-20 08:00:00,2024-06-20 08:00:00,"Monthly Coffee Subscription",15.00,0.00,USD,COMPLETED,82.50
+Income,"Consulting Fee",2024-06-19 15:30:00,2024-06-19 15:30:00,"Consulting services for ABC Company",500.00,10.00,USD,COMPLETED,667.50
+Expense,"Lunch",2024-06-20 12:00:00,2024-06-20 12:00:00,"Business lunch",20.00,0.00,USD,COMPLETED,647.50
+Income,"Interest earned",2024-06-20 00:00:00,2024-06-20 00:00:00,"Interest earned on savings account",2.50,0.00,USD,COMPLETED,649.50
+Expense,"Movie ticket",2024-06-21 18:00:00,2024-06-21 18:00:00,"Ticket for Friday night movie",12.00,0.50,USD,COMPLETED,637.00
+Income,"Freelance project",2024-06-18 10:00:00,2024-06-20 17:00:00,"Completed freelance web development project",250.00,5.00,USD,COMPLETED,882.00
+Expense,"Car payment",2024-06-15 00:00:00,2024-06-15 00:00:00,"Monthly car payment",300.00,0.00,USD,COMPLETED,582.00
+Income,"Salary",2024-06-01 09:00:00,2024-06-01 09:00:00,"Monthly salary deposit",1800.00,0.00,USD,COMPLETED,2882.00
+Expense,"Rent",2024-06-01 00:00:00,2024-06-01 00:00:00,"Monthly rent payment",1000.00,0.00,USD,COMPLETED,1882.00
