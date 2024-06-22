@@ -97,6 +97,8 @@ export const ImportCard = ({ data, onCancel, onSubmit }: Props) => {
     }));
 
     console.log({ formattedData });
+
+    onSubmit(formattedData);
   };
 
   return (
