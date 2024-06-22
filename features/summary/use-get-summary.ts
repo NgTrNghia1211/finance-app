@@ -4,29 +4,31 @@ import { useSearchParams } from "next/navigation";
 import { client } from "@/lib/hono";
 import { convertAmountFromMiliunits } from "@/lib/utils";
 
-export const useGetTransactions = () => {
+export const useGetSummary = () => {
   const params = useSearchParams();
   const from = params.get("from") || "";
   const to = params.get("to") || "";
   const accountId = params.get("accountId") || "";
 
   const query = useQuery({
-    queryKey: ["transactions", { from, to, accountId }],
+    queryKey: ["summary", { from, to, accountId }],
     queryFn: async () => {
-      const response = await client.api.transactions.$get({
+      const response = await client.api.summary.$get({
         query: { from, to, accountId },
       });
 
       if (!response.ok) {
-        throw new Error(`Failed to get transaction of ${accountId}`);
+        throw new Error(`Failed to get summary of ${accountId}`);
       }
 
       const { data } = await response.json();
 
-      return data.map((transaction) => ({
-        ...transaction,
-        amount: convertAmountFromMiliunits(transaction.amount),
-      }));
+      return {
+        ...data,
+        incomeAmount: convertAmountFromMiliunits(data.incomeAmount),
+        expensesAmount: convertAmountFromMiliunits(data.expenseAmount),
+        remainingAmount: convertAmountFromMiliunits(data.remainingAmount),
+      };
     },
   });
 

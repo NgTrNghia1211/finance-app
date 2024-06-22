@@ -4,7 +4,7 @@ import { z } from "zod";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 
-import { converAmountToMiliunits } from "@/lib/utils";
+import { convertAmountToMiliunits } from "@/lib/utils";
 import { insertTransactionSchema } from "@/db/schema";
 
 import { Trash } from "lucide-react";
@@ -71,7 +71,7 @@ export const TransactionForm = ({
     console.log("Transaction Value: ", { values });
 
     const amount = parseFloat(values.amount);
-    const amountinMiliunits = converAmountToMiliunits(amount);
+    const amountinMiliunits = convertAmountToMiliunits(amount);
 
     onSubmit({
       ...values,

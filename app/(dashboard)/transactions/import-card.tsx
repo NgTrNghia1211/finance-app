@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { ImportTable } from "./import-table";
-import { converAmountToMiliunits } from "@/lib/utils";
+import { convertAmountToMiliunits } from "@/lib/utils";
 import { format, parse } from "date-fns";
 
 const dateFormat = "yyyy-MM-dd HH:mm:ss";
@@ -92,7 +92,7 @@ export const ImportCard = ({ data, onCancel, onSubmit }: Props) => {
 
     const formattedData = arrayOfData.map((item) => ({
       ...item,
-      amount: converAmountToMiliunits(parseFloat(item.amount)),
+      amount: convertAmountToMiliunits(parseFloat(item.amount)),
       date: format(parse(item.date, dateFormat, new Date()), outputFormat),
     }));
 

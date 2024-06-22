@@ -5,17 +5,7 @@ import { db } from "@/db/drizzle";
 import { clerkMiddleware, getAuth } from "@hono/clerk-auth";
 import { zValidator } from "@hono/zod-validator";
 
-import {
-  ConsoleLogWriter,
-  and,
-  desc,
-  eq,
-  gte,
-  lt,
-  lte,
-  sql,
-  sum,
-} from "drizzle-orm";
+import { and, desc, eq, gte, lt, lte, sql, sum } from "drizzle-orm";
 import { accounts, categories, transactions } from "@/db/schema";
 
 import { HTTPException } from "hono/http-exception";
